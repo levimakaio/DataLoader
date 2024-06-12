@@ -1,5 +1,7 @@
 #==================================================================================================
 #
+#Copyright 2024, LM Robotics , All rights reserved
+#
 # release Notes
 #
 #DataLoaded is a python class modifier to make saving, loading and displaying class configurations
@@ -40,7 +42,6 @@
 #
 # 2024/03/05 version 0.8.0 Initial Release
 #
-#Copyright 2024, LM Robotics , All rights reserved
 #
 #==================================================================================================
 import json, os, ctypes
