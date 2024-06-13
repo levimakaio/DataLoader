@@ -192,6 +192,13 @@ def getMembers(structure):
 		return structure.__dict__
 
 
+def printException_expandDict(self, key, value):
+	string = ''
+	for eventKey, event in value.items():
+		string+= subString(eventKey, event, self.printIndentSize)
+	return f'{(key +":")} \n' + indentString(string, 4)
+
+
 #This should go in my json lib and is a fragile function right now so I need to monitor it when I use it
 class MyJSONEncoder(json.JSONEncoder):
 
