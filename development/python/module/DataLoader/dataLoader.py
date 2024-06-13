@@ -114,6 +114,9 @@ def createDataLoaderClassfromDict(DataLoaderStruct, inDict):
 def indentString(string, indentSize = 4):
 	#add whiteSpace at the begining of each line of a string
 
+	if string == '':
+		return ''
+
 	whiteSpace  = ' '*indentSize
 
 	splitString = (whiteSpace + string).split('\n')
