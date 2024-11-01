@@ -180,17 +180,38 @@ def pointerString(key, value, indentSize=4):
 	else:
 		return f'*{(key +":").ljust(30,"-")} Null \n'
 
+
+def get_fields(structure, fields:list = None):
+#get a list of fields for all inherited members of a class or instance
+#This function is recursive and fields is expected to be empty or None for the top level call
+
+	if fields is None:
+		fields = []
+
+	if not isinstance(structure, type):
+		return get_fields(structure.__class__, fields)
+
+	if hasattr(structure, '_fields_'):
+		for name, value in structure._fields_:
+			fields.append(name)
+
+		for base in structure.__bases__:
+			get_fields(base, fields)
+
+	return fields
+
+
 def getMembers(structure):
 
 	#TODO: findout if there is a build in function that does this
-		
+	#TODO: This needs more testing for inherited classes, inheritance is not supported in non ctypes.Structures yet
+
 	#check if the structure is Ctypes.  If it is create a dictionary from the _feilds_ list
 	#otherwise use the build in vale of __dict__
 	if isinstance(structure, ctypes.Structure):
-		return dict( (f[0], getattr(structure, f[0]) ) for f in structure._fields_)
+		return dict( (f, getattr(structure, f) ) for f in get_fields(structure))
 	else:
 		return structure.__dict__
-
 
 def printException_expandDict(self, key, value):
 	string = ''
