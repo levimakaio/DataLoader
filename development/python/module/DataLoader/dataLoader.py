@@ -455,10 +455,23 @@ class DataLoader_typ():
 	def jsonDumps(self, indent = 4):
 		return json.dumps(self.jsonOutput(self.cfgExclude), indent=indent, cls=MyJSONEncoder)
 
-	def saveJson(self, file):
+	def saveJson(self, file, overWrite=False):
 
-		with open(file, 'w') as fp:
-			fp.write(self.jsonDumps(indent = 4))
+
+		if overWrite==False:
+			#Check if file exits
+			if os.path.isfile(file):
+				overWrite = input(f'file:\n\n\t"{file}"\n\n already exists, do you want to overwrite it? y/n')
+				if overWrite.lower() in ['y', 'yes']:
+					overWrite = True
+				else:
+					overWrite = False
+			else:
+				overWrite=True
+
+		if overWrite:
+			with open(file, 'w') as fp:
+				fp.write(self.jsonDumps(indent = 4))
 
 #Print outputs
 
