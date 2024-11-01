@@ -281,6 +281,9 @@ class DataLoader_typ():
 	#indent size for printing
 	printIndentSize = 4
 
+	def __init__(self, cfgFile=None, createNew=False, **kwargs):
+		self.load_cfg_kwargs(cfgFile=cfgFile, createNew=createNew, **kwargs)
+
 #cfg Loading
 	def loadKW(self,**kwargs):
 
@@ -342,7 +345,7 @@ class DataLoader_typ():
 			if value.lower() in ['y', 'yes']:
 				self.saveJson(file)
 
-	def load_cfg_kwargs(self, cfgFile=None, **kwargs):
+	def load_cfg_kwargs(self, cfgFile=None, createNew=False, **kwargs):
 
 		#Load configuration file if specified
 		if cfgFile is not None:
@@ -360,10 +363,19 @@ class DataLoader_typ():
 		else:
 			jsonData = {}
 
+		#append kwargs to cfg values
+		#kwargs will overwrite cfg values
 		jsonData.update(kwargs)
 
 		#Overwrite cfg values for key words that are provided
-		self.loadKW(**jsonData)
+		if not createNew:
+			#will only write data to existing members
+			self.loadKW(**jsonData)
+		else:
+			#will create members that do not exist
+			createDataLoaderClassfromDict(self, jsonData)
+
+		return self
 
 #jsonOutputs
 
