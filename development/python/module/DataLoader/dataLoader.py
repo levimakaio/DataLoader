@@ -305,6 +305,10 @@ class DataLoader_typ():
 	def __init__(self, cfgFile=None, createNew=False, **kwargs):
 		self.load_cfg_kwargs(cfgFile=cfgFile, createNew=createNew, **kwargs)
 
+	def fromDict(self, inDict):
+		createDataLoaderClassfromDict(self, inDict)
+		return self
+
 #cfg Loading
 	def loadKW(self,**kwargs):
 
