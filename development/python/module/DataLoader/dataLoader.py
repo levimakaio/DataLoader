@@ -139,12 +139,12 @@ def valueString(key, value, indentSize=4, maxArrayLen = 10):
 		#if this is a cTypes array
 		if isinstance(value, ctypes.Array):
 
-				#loop Though each value of ths array 
+				#loop Though each value of this array 
 				string = ''
 				for index, item in enumerate(value):
 
 					#if array is longer then 10 values then after the 10th
-					#value displaythe last value and break 
+					#value display the last value and break 
 					if index > maxArrayLen:
 						string += '.....'.center(30) + '\n'
 						string += valueString(f'{key}[{len(value)-1}]',item, indentSize)
@@ -167,7 +167,7 @@ def valueString(key, value, indentSize=4, maxArrayLen = 10):
 		if isinstance(value, (ctypes._Pointer) ):
 			return pointerString(key, value)
 
-		#if not an array then return a string with a formated name and value
+		#if not an array then return a string with a formatted name and value
 		return formatedString(key,value)
 
 def pointerString(key, value, indentSize=4):
@@ -509,13 +509,13 @@ class DataLoader_typ():
 				string += self.printException[key](self, key, value)
 				continue
 
-			# recursivly get the all the members for this currrent member in this class
+			# recursively get the all the members for this current member in this class
 			#and return a string with each nested depth indented
 			if isinstance(value, DataLoader_typ):
 				string += subString(key,value, self.printIndentSize)
 				continue
 
-			# get a foramted string of the name and value
+			# get a formatted string of the name and value
 			# of the current member of this class 
 			string += valueString(key, value, self.printIndentSize)
 
