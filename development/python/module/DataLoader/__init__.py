@@ -8,5 +8,6 @@ from .dataLoader import createDataLoaderClassfromDict
 from .dataLoader import createMember
 
 from .dataLoader import printException_expandDict
+from .dataLoader import printException_expandList
 
 from.pathLoader import PathLoader_typ

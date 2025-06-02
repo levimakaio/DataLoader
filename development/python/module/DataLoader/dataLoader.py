@@ -213,10 +213,18 @@ def getMembers(structure):
 	else:
 		return structure.__dict__
 
+
+
 def printException_expandDict(self, key, value):
 	string = ''
 	for eventKey, event in value.items():
 		string+= subString(eventKey, event, self.printIndentSize)
+	return f'{(key +":")} \n' + indentString(string, 4)
+
+def printException_expandList(self, key, value):
+	string = ''
+	for each in value:
+		string+= f'{each}\n'
 	return f'{(key +":")} \n' + indentString(string, 4)
 
 
